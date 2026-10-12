@@ -1,0 +1,15 @@
+REM Test payload for Latin American (LATAM) keyboard layout
+REM This firmware build has no literal "LATAM" locale - win_es-MX is the
+REM closest match used by this Ducky lib for Spanish Latin American layouts.
+REM Requires platformio.ini -> [keyboardlayouts] -D LOCALE_win_es_MX (already enabled)
+
+KEYBOARD_LAYOUT win_es-MX
+
+DELAY 1000
+GUI r
+DELAY 500
+STRING notepad
+ENTER
+DELAY 1000
+STRING Probando layout LATAM: ñ Ñ á é í ó ú ¿? ¡! @ " ' / \
+ENTER

