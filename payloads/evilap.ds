@@ -1,3 +1,5 @@
+KEYBOARD_LAYOUT win_es-MX
+
 WEB_OFF
 ESP32M ssid -a -n AppleFreeWiFi
 ESP32M select -a 1

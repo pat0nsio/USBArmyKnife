@@ -1,6 +1,9 @@
 REM To run this, you first need to create a disk image which contains the agent
 REM Follow tools/README.md for instructions
 REM Make sure the disk image is named agent.img you put it on the SD card
+
+KEYBOARD_LAYOUT win_es-MX
+
 LOG UK agent script
 
 DEFINE #FILE /agentInstalled

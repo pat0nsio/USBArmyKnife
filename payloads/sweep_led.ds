@@ -1,4 +1,7 @@
 REM Test LED output color by sweeping the hue
+
+KEYBOARD_LAYOUT win_es-MX
+
 VAR $H = 0
 WHILE (TRUE)
     DISPLAY_CLEAR

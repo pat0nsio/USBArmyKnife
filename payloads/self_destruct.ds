@@ -5,6 +5,8 @@ FUNCTION SELF_DESTRUCT()
     RESET
 END_FUNCTION
 
+KEYBOARD_LAYOUT win_es-MX
+
 REM wait for device to settle down or for you to retreat
 DELAY 3000
 

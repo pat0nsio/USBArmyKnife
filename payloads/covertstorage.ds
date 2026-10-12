@@ -1,4 +1,7 @@
 REM Turn these on for debugging
+
+KEYBOARD_LAYOUT win_es-MX
+
 WIFI_OFF
 TFT_OFF
 LED_OFF

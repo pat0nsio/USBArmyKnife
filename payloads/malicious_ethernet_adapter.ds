@@ -1,4 +1,7 @@
 REM when running this script make sure your device starts in Serial mode
+
+KEYBOARD_LAYOUT win_es-MX
+
 DEFINE #SETTING_NAME usbDeviceType
 VAR $SETTING_USB_DEVICE_TYPE_ETHERNET = 2
 

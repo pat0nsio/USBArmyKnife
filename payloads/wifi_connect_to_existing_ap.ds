@@ -1,4 +1,7 @@
 REM Rather that creating its own access point this example connects to an existing Wi-Fi network.
+
+KEYBOARD_LAYOUT win_es-MX
+
 DEFINE #SETTING_NAME wifi-ap-mode
 
 REM First we need to check that we are running in access point mode.

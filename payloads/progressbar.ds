@@ -1,3 +1,5 @@
+KEYBOARD_LAYOUT win_es-MX
+
 LED 50 100 100 50
 DISPLAY_PNG /progressbar_1.png
 DELAY 1500

@@ -1,4 +1,7 @@
 REM Clear screen and turn off LED to kill any looping job, reset and exit.
+
+KEYBOARD_LAYOUT win_es-MX
+
 DISPLAY_CLEAR
 DISPLAY_TEXT 10 20 Clearing screen and,
 DISPLAY_TEXT 10 30      turning off LED...
